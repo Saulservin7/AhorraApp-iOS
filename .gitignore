@@ -1,0 +1,66 @@
+# ========================================
+# Xcode
+# ========================================
+
+## User-specific settings
+xcuserdata/
+*.xccheckout
+*.xcodeproj/project.xcworkspace/
+
+## Build artifacts
+build/
+DerivedData/
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.hmap
+
+## Workspace data
+*.xcworkspace
+
+# ========================================
+# Swift Playgrounds
+# ========================================
+timeline.xctimeline
+playground.xcworkspace
+
+# ========================================
+# Swift Package Manager
+# ========================================
+.build/
+# Uncomment the following if you don’t want to track resolved packages or Pins
+# Package.resolved
+# Package.pins
+# Packages/
+# .swiftpm
+
+# ========================================
+# CocoaPods
+# ========================================
+# Uncomment the next line if you don't want to check in Pods (not always recommended)
+# Pods/
+
+# ========================================
+# Carthage
+# ========================================
+Carthage/Build/
+# Uncomment the following if you want to ignore checked out dependencies
+# Carthage/Checkouts/
+
+# ========================================
+# Fastlane
+# ========================================
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# ========================================
+# Miscellaneous
+# ========================================
+*.xcuserstate
+*.moved-aside
+*.swp
+*.lock
+*.orig
+*.DS_Store

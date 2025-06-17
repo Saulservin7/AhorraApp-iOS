@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct AhorrAppApp: App {
-    var body: some Scene {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject private var sessionManager = SessionManager()
+
+      var body: some Scene {
         WindowGroup {
-            ContentView()
+          NavigationView {
+            RootView()
+                  .environmentObject(sessionManager)
+          }
         }
-    }
+      }
 }
