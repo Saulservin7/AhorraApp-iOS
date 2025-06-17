@@ -7,14 +7,16 @@
 import SwiftUI
 struct RootView: View {
     @StateObject private var sessionManager = SessionManager()
-
+    
+    private let authViewModel = AppDiContainer.shared.makeAuthViewModel()
+    
     var body: some View {
         Group {
             if sessionManager.isAuthenticated {
                 HomeView()
                     .environmentObject(sessionManager)
             } else {
-                LoginView()
+                LoginView(viewModel : authViewModel)
                     .environmentObject(sessionManager)
             }
         }

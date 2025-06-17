@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject  var viewModel = AppDiContainer.shared.makeAuthViewModel()
+    @StateObject  var viewModel : AuthViewModel
     @State private var isLoading = false  // Variable para manejar el estado de carga
     @State private var path: [AppRoute] = []
     @EnvironmentObject private var sessionManager: SessionManager
@@ -100,7 +100,11 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    // Creamos una instancia del ViewModel solo para el preview
+    let authViewModel = AppDiContainer.shared.makeAuthViewModel()
+    
+    // Inyectamos esa instancia
+    return LoginView(viewModel: authViewModel)
         .environmentObject(SessionManager())
 }
 

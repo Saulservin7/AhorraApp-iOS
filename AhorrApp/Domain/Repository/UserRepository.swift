@@ -7,4 +7,7 @@
 
 protocol UserRepository{
     func createUser(_ user:User) async throws
+    
+    func getUser(id:String) async throws -> User
 }
+

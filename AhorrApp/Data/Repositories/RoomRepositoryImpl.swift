@@ -8,7 +8,12 @@
 import FirebaseFirestore
 final class RoomRepositoryImpl:RoomRepository{
     
-    private let db = Firestore.firestore()
+    private let db : Firestore
+    
+    init(db: Firestore){
+        self.db = db
+        
+    }
     
     func createRoom(_ room: Room) async throws {
         try db.collection("rooms").document(room.id).setData(from: room)
@@ -50,6 +55,5 @@ final class RoomRepositoryImpl:RoomRepository{
                 continuation.onTermination = { _ in listener.remove() }
             }
         }
-    
     
 }
