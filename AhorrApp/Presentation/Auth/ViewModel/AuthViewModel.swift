@@ -20,12 +20,15 @@ final class AuthViewModel: ObservableObject {
     private let registerUseCase: RegisterUseCase
     private let logOutUseCase: LogOutUseCase
     private let createUserUseCase: CreateUserUseCase
+    
+    private weak var sessionManager:SessionManager?
 
-    init(loginUseCase: LoginUseCase, registerUseCase: RegisterUseCase,logOutUseCase: LogOutUseCase,createUserUseCase:CreateUserUseCase) {
+    init(loginUseCase: LoginUseCase, registerUseCase: RegisterUseCase,logOutUseCase: LogOutUseCase,createUserUseCase:CreateUserUseCase,sessionManager : SessionManager) {
         self.loginUseCase = loginUseCase
         self.registerUseCase = registerUseCase
         self.logOutUseCase = logOutUseCase
         self.createUserUseCase = createUserUseCase
+        self.sessionManager = sessionManager
     }
 
     func login() async {
@@ -34,6 +37,7 @@ final class AuthViewModel: ObservableObject {
         case .success:
             appRoute = .home
             isLoginSuccess = true
+            sessionManager?.signIn()
             break
         case .failure(let error):
             errorMessage = error.localizedDescription
@@ -48,6 +52,7 @@ final class AuthViewModel: ObservableObject {
                        let _ = await createUserUseCase.execute(id: user.uid, email: user.email ?? "")
             appRoute = .home
             isLoginSuccess = true
+            sessionManager?.signIn()
             break
         case .failure(let error):
             errorMessage = error.localizedDescription
@@ -61,6 +66,7 @@ final class AuthViewModel: ObservableObject {
         case .success:
             appRoute = nil   // ✅ Limpias la ruta
             isLoginSuccess = false  // ✅ Ya no hay sesión activa
+            sessionManager?.signOut()
         case .failure(let error):
             errorMessage = error.localizedDescription
         }

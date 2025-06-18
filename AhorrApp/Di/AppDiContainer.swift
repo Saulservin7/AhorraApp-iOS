@@ -13,14 +13,14 @@ final class AppDiContainer{
     private init(){}
     
     @MainActor
-    func makeAuthViewModel() -> AuthViewModel {
+    func makeAuthViewModel(sessionManager:SessionManager) -> AuthViewModel {
         let repository=FirebaseAuthService()
         let userRepository = UserRepositoryImpl()
         let loginUseCase = LoginUseCase(repository: repository)
         let registerUseCase=RegisterUseCase(repository: repository)
         let logOutUseCase = LogOutUseCase(repository: repository)
         let createUserUseCase = CreateUserUseCase(repository: userRepository)
-        return AuthViewModel(loginUseCase: loginUseCase, registerUseCase: registerUseCase,logOutUseCase: logOutUseCase,createUserUseCase:createUserUseCase )
+        return AuthViewModel(loginUseCase: loginUseCase, registerUseCase: registerUseCase,logOutUseCase: logOutUseCase,createUserUseCase:createUserUseCase, sessionManager: sessionManager)
         
         
     }
@@ -32,7 +32,7 @@ final class AppDiContainer{
         let userRepository = UserRepositoryImpl()
         let getUserUseCase = GetUserUseCase(repository: userRepository)
         
-        let profileViewModel = ProfileViewModel(getUserCase: getUserUseCase)
+        let profileViewModel = ProfileViewModel(getUserUseCase: getUserUseCase)
         
         return profileViewModel
     }

@@ -6,6 +6,8 @@
 //
 import Foundation
 import FirebaseAuth
+
+@MainActor
 final class ProfileViewModel : ObservableObject {
     
     enum ViewState {
@@ -16,10 +18,10 @@ final class ProfileViewModel : ObservableObject {
     
     @Published var state: ViewState = .loading
     
-    private let getUserCase : GetUserUseCase
+    private let getUserUseCase : GetUserUseCase
     
-    init(getUserCase: GetUserUseCase){
-        self.getUserCase = getUserCase
+    init(getUserUseCase: GetUserUseCase){
+        self.getUserUseCase = getUserUseCase
         
     }
     
@@ -34,5 +36,12 @@ final class ProfileViewModel : ObservableObject {
         // El estado ya es .loading por defecto, no hace falta cambiarlo.
         
         let result = await getUserUseCase.execute(id: userId)
+        
+        switch result{
+        case .success(let user):
+            self.state = .success(user: user)
+        case .failure(let error):
+            self.state = .error(message: error.localizedDescription)
+        }
     }
 }

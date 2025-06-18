@@ -79,7 +79,7 @@ struct LoginView: View {
             }.navigationDestination(for: AppRoute.self) { route in
                 switch route {
                 case .home:
-                    HomeView()
+                    HomeView(authViewmodel: viewModel)
                         .environmentObject(sessionManager) // ✅ Pasa también el SessionManager
                 default:
                     EmptyView()
@@ -99,13 +99,6 @@ struct LoginView: View {
     }
 }
 
-#Preview {
-    // Creamos una instancia del ViewModel solo para el preview
-    let authViewModel = AppDiContainer.shared.makeAuthViewModel()
-    
-    // Inyectamos esa instancia
-    return LoginView(viewModel: authViewModel)
-        .environmentObject(SessionManager())
-}
+
 
 
