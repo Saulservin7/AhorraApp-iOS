@@ -16,6 +16,29 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack{
+            VStack(spacing: 0){
+                HStack(alignment: .center){
+                    Text("Home").font(.largeTitle).fontWeight(.bold)
+                    Spacer()
+                    
+                    HStack(spacing: 20){
+                        
+                        Button(action:{
+                            authViewmodel.logout()
+                        }){
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                                .foregroundStyle(.primary)
+                        }
+                        Button(action:{
+                            self.isShowingProfile = true
+                        }){
+                            ProfileBubble(imageURL: URL(string: "https://assets.laliga.com/squad/2024/t186/p220160/2048x2048/p220160_t186_2024_1_002_000.jpg")!)
+                        }
+                        
+                    }
+                    
+                }.padding([.horizontal,.top],40)
+            }
             ZStack(alignment: .bottomTrailing) {
                 // --- MODIFICACIÓN #1 ---
                 // Se añade un .padding(.top) a la VStack para crear
@@ -43,33 +66,21 @@ struct HomeView: View {
                     .padding(.trailing, 40)
                     .padding(.bottom, 20)
             }
-            // --- MODIFICACIÓN #2 ---
-            // Se restaura el modificador .navigationTitle(). Esta es la forma
-            // correcta en SwiftUI de mostrar un título grande a la izquierda.
-            .navigationTitle("Home")
-            .toolbar{
-                // Mantenemos el ToolbarItemGroup solo para los botones de la derecha.
-                ToolbarItemGroup(placement : .navigationBarTrailing){
-                    
-                    // Botón para mostrar el perfil
-                    Button(action:{
-                        self.isShowingProfile = true
-                    }){
-                        ProfileBubble(imageURL: URL(string: "https://assets.laliga.com/squad/2024/t186/p220160/2048x2048/p220160_t186_2024_1_002_000.jpg")!)
-                    }
-                    
-                    // Botón para cerrar sesión
-                    Button(action:{
-                        authViewmodel.logout()
-                    }){
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                            .foregroundStyle(.primary)
-                    }
-                }
-            }
+            
         }
         .sheet(isPresented: $isShowingProfile){
             ProfileView(viewModel: diContainer.makeProfileViewModel())
         }
     }
+}
+
+
+#Preview {
+    
+    let sessionManager = SessionManager()
+    let viewModel = AppDiContainer.shared.makeAuthViewModel(sessionManager: sessionManager)
+    
+    HomeView(authViewmodel: viewModel)
+        .environmentObject(sessionManager)
+    
 }
