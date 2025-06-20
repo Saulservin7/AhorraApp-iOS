@@ -69,7 +69,11 @@ struct HomeView: View {
             
         }
         .sheet(isPresented: $isShowingProfile){
-            ProfileView(viewModel: diContainer.makeProfileViewModel())
+            if #available(iOS 17.0, *) {
+                ProfileView(viewModel: diContainer.makeProfileViewModel())
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 }

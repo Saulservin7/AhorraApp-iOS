@@ -13,7 +13,7 @@ struct CreateUserUseCase{
     }
     
     func execute(id:String,email:String) async -> Result<Void,AppError>{
-        let user = User(id: id, email: email)
+        let user = User(id: id, email: email,name: "",photoURL: nil)
         do{
             try await repository.createUser(user)
             return .success(())

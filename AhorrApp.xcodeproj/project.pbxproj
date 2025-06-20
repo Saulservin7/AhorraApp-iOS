@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C696E66E2E048BB20010904A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C696E66D2E048BB20010904A /* FirebaseAnalytics */; };
+		C696E6702E048BB20010904A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C696E66F2E048BB20010904A /* FirebaseStorage */; };
+		C696E6722E048BB20010904A /* FirebaseVertexAI in Frameworks */ = {isa = PBXBuildFile; productRef = C696E6712E048BB20010904A /* FirebaseVertexAI */; };
+		C696E6E12E0523550010904A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C696E6E02E0523550010904A /* Kingfisher */; };
 		C6F927602DBC6E0C00B450EF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C6F9275F2DBC6E0C00B450EF /* FirebaseAuth */; };
 		C6F927622DBC6E0C00B450EF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C6F927612DBC6E0C00B450EF /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
@@ -57,8 +61,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C696E6E12E0523550010904A /* Kingfisher in Frameworks */,
 				C6F927602DBC6E0C00B450EF /* FirebaseAuth in Frameworks */,
+				C696E6702E048BB20010904A /* FirebaseStorage in Frameworks */,
+				C696E6722E048BB20010904A /* FirebaseVertexAI in Frameworks */,
 				C6F927622DBC6E0C00B450EF /* FirebaseFirestore in Frameworks */,
+				C696E66E2E048BB20010904A /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +129,10 @@
 			packageProductDependencies = (
 				C6F9275F2DBC6E0C00B450EF /* FirebaseAuth */,
 				C6F927612DBC6E0C00B450EF /* FirebaseFirestore */,
+				C696E66D2E048BB20010904A /* FirebaseAnalytics */,
+				C696E66F2E048BB20010904A /* FirebaseStorage */,
+				C696E6712E048BB20010904A /* FirebaseVertexAI */,
+				C696E6E02E0523550010904A /* Kingfisher */,
 			);
 			productName = AhorrApp;
 			productReference = C6F927322DBC6C3400B450EF /* AhorrApp.app */;
@@ -207,6 +219,7 @@
 			packageReferences = (
 				C6F9275E2DBC6E0C00B450EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C6E1DA722DBD321B00CE726E /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				C696E6DF2E0523550010904A /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C6F927332DBC6C3400B450EF /* Products */;
@@ -583,6 +596,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C696E6DF2E0523550010904A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.2;
+			};
+		};
 		C6E1DA722DBD321B00CE726E /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint";
@@ -602,6 +623,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C696E66D2E048BB20010904A /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6F9275E2DBC6E0C00B450EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		C696E66F2E048BB20010904A /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6F9275E2DBC6E0C00B450EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		C696E6712E048BB20010904A /* FirebaseVertexAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6F9275E2DBC6E0C00B450EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseVertexAI;
+		};
+		C696E6E02E0523550010904A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C696E6DF2E0523550010904A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		C6F9275F2DBC6E0C00B450EF /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C6F9275E2DBC6E0C00B450EF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

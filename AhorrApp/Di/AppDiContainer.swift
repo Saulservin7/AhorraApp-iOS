@@ -25,6 +25,7 @@ final class AppDiContainer{
         
     }
     
+    @available(iOS 17.0, *)
     @MainActor
     
     func makeProfileViewModel() -> ProfileViewModel {
@@ -32,7 +33,12 @@ final class AppDiContainer{
         let userRepository = UserRepositoryImpl()
         let getUserUseCase = GetUserUseCase(repository: userRepository)
         
-        let profileViewModel = ProfileViewModel(getUserUseCase: getUserUseCase)
+        let firebaseCurrentUserProvider = FirebaseCurrentUserProvider()
+        let getCurrentUserIdUseCase = GetCurrentUserIdUseCase(currentUserProvider: firebaseCurrentUserProvider)
+        
+        let updateUserProfileUseCase = UpdateUserProfileUseCase(userRepository: userRepository)
+        
+        let profileViewModel = ProfileViewModel(getUserUseCase: getUserUseCase, updateUserProfileUseCase: updateUserProfileUseCase, getCurrentUserIdUseCase: getCurrentUserIdUseCase)
         
         return profileViewModel
     }
@@ -44,6 +50,4 @@ final class AppDiContainer{
         )
     }
 }
-
-
 
