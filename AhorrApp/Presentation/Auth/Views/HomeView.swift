@@ -32,8 +32,9 @@ struct HomeView: View {
                         Button(action:{
                             self.isShowingProfile = true
                         }){
-                            ProfileBubble(imageURL: URL(string: "https://assets.laliga.com/squad/2024/t186/p220160/2048x2048/p220160_t186_2024_1_002_000.jpg")!)
-                        }
+                            if let user = authViewmodel.user, let photoURL = user.photoURL{
+                                ProfileBubble(imageURL: photoURL)
+                            }}
                         
                     }
                     
@@ -68,11 +69,13 @@ struct HomeView: View {
             }
             
         }
-        .sheet(isPresented: $isShowingProfile){
+        .sheet(isPresented: $isShowingProfile, onDismiss: {
+            Task {
+                await authViewmodel.fetchCurrentUser()
+            }
+        }) {
             if #available(iOS 17.0, *) {
                 ProfileView(viewModel: diContainer.makeProfileViewModel())
-            } else {
-                // Fallback on earlier versions
             }
         }
     }
@@ -88,3 +91,4 @@ struct HomeView: View {
         .environmentObject(sessionManager)
     
 }
+

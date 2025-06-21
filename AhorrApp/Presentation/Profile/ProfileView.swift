@@ -17,6 +17,8 @@ struct ProfileView : View{
     
     @State private var editMode: Bool = false
     
+    var onProfileUpdate: (() -> Void)?
+    
     var body: some View {
         NavigationView{
             VStack(spacing : 20){
@@ -130,8 +132,14 @@ struct ProfileView : View{
                                     }
                                 }
             }
+        }.onChange(of: viewModel.updateSucceded){
+            success in
+            if success {
+                onProfileUpdate?()
+                dismiss()
+            }
         }
-        .onAppear{
+            .onAppear{
             Task{
                 await viewModel.fetchCurrentUser()
             }

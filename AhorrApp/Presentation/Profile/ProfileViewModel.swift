@@ -11,6 +11,8 @@ import SwiftUI
 @Observable
 final class ProfileViewModel : ObservableObject {
     
+    var updateSucceded = false
+    
     enum ViewState: Equatable{
         case loading
         case success(user:User)
@@ -88,6 +90,8 @@ final class ProfileViewModel : ObservableObject {
                     // Llama al Use Case para actualizar el perfil
                     try await updateUserProfileUseCase.execute(userId: userId, name: currentUserName, imageData: imageDataToUpload)
                     
+                    self.updateSucceded = true
+                    
                     // Si la actualización es exitosa, volvemos a cargar el usuario para reflejar los cambios
                     await fetchCurrentUser() // Vuelve a cargar el usuario para obtener los datos actualizados, incluyendo la nueva photoURL
                     
@@ -116,3 +120,4 @@ final class ProfileViewModel : ObservableObject {
 }
     
     
+

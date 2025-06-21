@@ -20,9 +20,17 @@ final class AppDiContainer{
         let registerUseCase=RegisterUseCase(repository: repository)
         let logOutUseCase = LogOutUseCase(repository: repository)
         let createUserUseCase = CreateUserUseCase(repository: userRepository)
-        return AuthViewModel(loginUseCase: loginUseCase, registerUseCase: registerUseCase,logOutUseCase: logOutUseCase,createUserUseCase:createUserUseCase, sessionManager: sessionManager)
-        
-        
+        let getCurrentUserIdUseCase = GetCurrentUserIdUseCase(currentUserProvider: FirebaseCurrentUserProvider())
+        let getUserUseCase = GetUserUseCase(repository: userRepository)
+        return AuthViewModel(
+            loginUseCase: loginUseCase,
+            registerUseCase: registerUseCase,
+            logOutUseCase: logOutUseCase,
+            createUserUseCase: createUserUseCase,
+            sessionManager: sessionManager,
+            getCurrentUserIdUseCase: getCurrentUserIdUseCase,
+            getCurrentUser: getUserUseCase
+        )
     }
     
     @available(iOS 17.0, *)
